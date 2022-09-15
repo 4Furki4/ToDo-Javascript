@@ -14,6 +14,7 @@ function newElement() {
         localStorage.setItem("liste", JSON.stringify(toDo))
         addLiElement(inputToDo.value, toDo.length-1)
         $(".success").toast("show");
+        inputToDo.value = ""
     }else{
       $(".error").toast("show");
     }
@@ -51,16 +52,18 @@ function addLiElement(value,index) { // Ayrı bir metoda aktardım ve farklı ye
 
     // span.appendChild(i)
     // li.appendChild(span)    //i elementi, span içine, span elementi li elementi içine, li elementi de ul içine eklendi.
-    ulList.innerHTML +=`<li  id=${index}>${value}<span onClick=removeItem(${index}) class ="deleteEntry btn btn-outline-warning d-flex border-0 float-right"><i class="fa-sharp fa-solid fa-xmark"></i></span></li>`
+    ulList.innerHTML +=`<li onClick=makeItDone(${index}) id=${index}>${value}<span onClick=removeItem(${index}) class ="deleteEntry btn btn-outline-warning d-flex border-0 float-right"><i class="fa-sharp fa-solid fa-xmark"></i></span></li>`
 }
 
 
 function removeItem(index) {
-    console.log(index)
     let selectedLi = document.getElementById(index)
-    console.log(selectedLi)
     selectedLi.remove()
-    toDo.splice(Number(index),1)
+    toDo.splice(index,1)
     localStorage.setItem("liste", JSON.stringify(toDo))
 }
 
+function makeItDone(index) {
+    let selectedLi = document.getElementById(index)
+    selectedLi.classList.toggle("checked")
+}

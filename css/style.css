@@ -105,3 +105,10 @@ input {
 .button:hover {
   background-color: #bbb;
 }
+
+
+.makeItDone {
+  text-decoration-line: line-through;
+  background:url(/images/check.png);
+}
+
